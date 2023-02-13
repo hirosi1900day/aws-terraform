@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - infra/**
+      - v1_infra/**
       - .github/workflows/**
   workflow_dispatch:
 
