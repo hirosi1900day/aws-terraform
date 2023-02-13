@@ -35,4 +35,7 @@ jobs:
         with:
           terraform_version: ${{ env.TF_VERSION }}
           terraform_wrapper: false
-          
+      - name: format
+        run: |
+          terraform fmt --check
+          # --checkをつけることでfmtが正しければ正常終了の0を返し、fmtが正しくなければ0以外を返すのでエラーとなる
