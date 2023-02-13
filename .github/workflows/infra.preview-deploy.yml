@@ -56,9 +56,5 @@ jobs:
       - name: terraform paln
         run: | 
           terraform plan \
-            -var 'project=${{ env.TE_PROJECT }}' \
-            -var 'environment=${{ env.TF_ENV }}' \
-            -var 'domain=${{ env.TF_DOMAIN }}' \
-            -input=false \
             -no-color \
             -detailed-exitcode
