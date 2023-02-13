@@ -16,7 +16,9 @@ permissions:
 env:
   TF_VERSION: 1.2.8
   AWS_REGION: ap-northeast-1
-  
+  TE_PROJECT:  tastylog
+  TF_ENV: dev
+  TF_DOMAIN: tastylog.work
 defaults:
   run: 
     shell: bash
@@ -51,3 +53,12 @@ jobs:
       - name: terraform validate
         run: |
           terraform validate -no-color
+      - name: terraform paln
+        run: | 
+          terraform plan \
+            -var 'project=${{ env.TE_PROJECT }}' \
+            -var 'environment=${{ env.TF_ENV }}' \
+            -var 'domain=${{ env.TF_DOMAIN }}' \
+            -input-false \
+            -no-color \
+            -detailed-exitcode
