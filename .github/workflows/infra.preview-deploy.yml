@@ -45,4 +45,9 @@ jobs:
         with: 
           role-to-assume: ${{ secrets.AWS_IAM_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
-          
+      - name: terraform init
+        run: | 
+          terraform init --no-color
+      - name: terraform validate
+        run: |
+          terraform validate --no-color
