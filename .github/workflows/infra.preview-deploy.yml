@@ -47,7 +47,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
       - name: terraform init
         run: | 
-          terraform init --no-color
+          terraform init -no-color
       - name: terraform validate
         run: |
-          terraform validate --no-color
+          terraform validate -no-color
