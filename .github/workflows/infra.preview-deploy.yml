@@ -59,6 +59,6 @@ jobs:
             -var 'project=${{ env.TE_PROJECT }}' \
             -var 'environment=${{ env.TF_ENV }}' \
             -var 'domain=${{ env.TF_DOMAIN }}' \
-            -input-false \
+            -input=false \
             -no-color \
             -detailed-exitcode
