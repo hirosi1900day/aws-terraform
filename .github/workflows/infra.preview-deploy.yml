@@ -64,7 +64,6 @@ jobs:
   deploy:
     name: Deploy
     needs: preview
-    # if: needs.preview.outputs.TF_PLAN_EXITCODE == 2
     runs-on: ubuntu-latest
       - name: checkout
         uses: actions/checkout@v3
