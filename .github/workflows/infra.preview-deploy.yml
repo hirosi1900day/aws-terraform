@@ -61,19 +61,11 @@ jobs:
             -input=false \
             -no-color \
             -detailed-exitcode
-      - name: terraform aplay
-        continue-on-error: true
-        if: steps.plan.outcome == 2
-        run: | 
-          echo "hellow"
   deploy:
     name: Deploy
     needs: preview
     # if: needs.preview.outputs.TF_PLAN_EXITCODE == 2
     runs-on: ubuntu-latest
-    steps:
-      - name: test
-        run: echo "${ needs.preview.outputs.TF_PLAN_EXITCODE }"
       - name: checkout
         uses: actions/checkout@v3
         with: 
@@ -90,4 +82,11 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
       - name: terraform init
         run: | 
-          terraform init -no-color
+          terraform init -no-colo
+      - name: terraform apply
+        continue-on-error: true
+        run: | 
+          terraform plan \
+            -input=false \
+            -no-color \
+            -auto-approve
