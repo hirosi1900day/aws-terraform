@@ -26,6 +26,8 @@ jobs:
   preview:
     name: Preview
     runs-on: ubuntu-latest
+    outputs:
+      TF_PLAN_EXITCODE: ${{steps.plan.outputs.exitcode}}
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -52,6 +54,8 @@ jobs:
         run: |
           terraform validate -no-color
       - name: terraform paln
+        id: plan
+        continue-on-error: true
         run: | 
           terraform plan \
             -no-color \
