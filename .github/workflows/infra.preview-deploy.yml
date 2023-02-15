@@ -63,7 +63,7 @@ jobs:
             -detailed-exitcode
       - name: terraform apply
         run: | 
-          terraform plan \
+          terraform apply \
             -input=false \
             -no-color \
             -auto-approve
