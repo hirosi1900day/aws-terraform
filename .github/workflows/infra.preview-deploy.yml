@@ -61,6 +61,11 @@ jobs:
             -input=false \
             -no-color \
             -detailed-exitcode
+      - name: terraform aplay
+        continue-on-error: true
+        if: steps.plan.outcome == 2
+        run: | 
+          echo "hellow"
   deploy:
     name: Deploy
     needs: preview
