@@ -27,7 +27,7 @@ jobs:
     name: Preview
     runs-on: ubuntu-latest
     outputs:
-      TF_PLAN_EXITCODE: ${{steps.plan.outputs.exitcode}}
+      TF_PLAN_EXITCODE: ${{ steps.plan.outputs.exitcode }}
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -68,7 +68,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: test
-        run: echo "${{ needs.preview.outputs.TF_PLAN_EXITCODE }}"
+        run: echo "${ needs.preview.outputs.TF_PLAN_EXITCODE }"
       - name: checkout
         uses: actions/checkout@v3
         with: 
