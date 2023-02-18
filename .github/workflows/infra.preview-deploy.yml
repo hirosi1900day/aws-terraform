@@ -64,7 +64,7 @@ jobs:
           echo $?
       - name: terraform apply
         run: | 
-          echo ${{ steps.plan.outputs.exitcode }}
+          echo ${ steps.plan.outputs.exitcode }
           # terraform apply \
           #   -input=false \
           #   -no-color \
