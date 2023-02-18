@@ -60,7 +60,6 @@ jobs:
           terraform plan \
             -no-color \
             -detailed-exitcode
-          echo $?
       - name: terraform apply
         run: | 
           echo ${{ steps.plan.outputs.exitcode == 2 }}
