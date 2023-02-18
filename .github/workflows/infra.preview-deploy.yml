@@ -59,10 +59,9 @@ jobs:
         run: | 
           terraform plan \
             -no-color \
-            -detailed-exitcode
       - name: terraform apply
         run: | 
-          echo ${{ steps.plan.outputs.exitcode == 2 }}
+          echo ${{ !contains(steps.plan.outputs.stdout, 'No changes.') }}
           # terraform apply \
           #   -input=false \
           #   -no-color \
