@@ -1,0 +1,43 @@
+name: "infra preview & deploy"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+  
+env:
+  TF_VERSION: 1.2.8
+  AWS_REGION: ap-northeast-1
+  
+defaults:
+  run: 
+    shell: bash
+    working-directory: "v1_infra/"
+  
+jobs:
+  destory:
+    name: Preview
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        with: 
+          fetch-depth: 0
+      - name: setup terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
+      - name: aws credencial setup
+        uses: aws-actions/configure-aws-credentials@v1
+        with: 
+          role-to-assume: ${{ secrets.AWS_IAM_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+      - name: terraform init
+        run: | 
+          terraform init -no-color
+      - name: terraform destory
+        run: terraform apply -destroy
+          
