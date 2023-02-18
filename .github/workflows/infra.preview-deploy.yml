@@ -58,13 +58,12 @@ jobs:
         continue-on-error: true
         run: | 
           terraform plan \
-            -input=false \
             -no-color \
             -detailed-exitcode
           echo $?
       - name: terraform apply
         run: | 
-          echo ${ steps.plan.outputs.exitcode }
+          echo ${{ steps.plan.outputs.exitcode == 2 }}
           # terraform apply \
           #   -input=false \
           #   -no-color \
