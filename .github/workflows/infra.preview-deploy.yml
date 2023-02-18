@@ -61,12 +61,43 @@ jobs:
             -input=false \
             -no-color \
             -detailed-exitcode
-          echo "PLAN_STATUS=${$?}" >> $GITHUB_ENV
+          echo $?
       - name: terraform apply
+        if: ${{ steps.plan.outputs.exitcode == 2 }}
         run: | 
-          echo ${{ env.PLAN_STATUS }}
-          # terraform apply \
-          #   -input=false \
-          #   -no-color \
-          #   -auto-approve
+          terraform apply \
+            -input=false \
+            -no-color \
+            -auto-approve
+          
+    # deploy:
+    #   name: deploy
+    #   needs: preview
+    #   if: needs.preview.outputs.TF_PLAN_EXITCODE == 2
+    #   runs-on: ubuntu-latest
+    #   steps:
+    #     - name: checkout
+    #       uses: actions/checkout@v3
+    #       with: 
+    #         fetch-depth: 0
+    #     - name: setup terraform
+    #       uses: hashicorp/setup-terraform@v2
+    #       with:
+    #         terraform_version: ${{ env.TF_VERSION }}
+    #         terraform_wrapper: false
+    #     - name: aws credencial setup
+    #       uses: aws-actions/configure-aws-credentials@v1
+    #       with: 
+    #         role-to-assume: ${{ secrets.AWS_IAM_ROLE_ARN }}
+    #         aws-region: ${{ env.AWS_REGION }}
+    #     - name: terraform init
+    #       run: | 
+    #         terraform init -no-color
+    #     - name: terraform apply
+    #       run: | 
+    #         echo ${{ env.PLAN_STATUS }}
+    #       # terraform apply \
+    #       #   -input=false \
+    #       #   -no-color \
+    #       #   -auto-approve
           
