@@ -61,9 +61,13 @@ jobs:
             -input=false \
             -no-color \
             -detailed-exitcode
+          echo "PLAN_STATUS=${$?}" >> $GITHUB_ENV
       - name: terraform apply
+        if: env.PLAN_STATUS == 2
         run: | 
+          echo ${{ env.PLAN_STATUS }}
           terraform apply \
             -input=false \
             -no-color \
             -auto-approve
+          
