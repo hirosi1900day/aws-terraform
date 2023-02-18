@@ -63,12 +63,12 @@ jobs:
             -detailed-exitcode
           echo $?
       - name: terraform apply
-        if: ${{ steps.plan.outputs.exitcode == 2 }}
         run: | 
-          terraform apply \
-            -input=false \
-            -no-color \
-            -auto-approve
+          echo ${{ steps.plan.outputs.exitcode == 2 }}
+          # terraform apply \
+          #   -input=false \
+          #   -no-color \
+          #   -auto-approve
           
     # deploy:
     #   name: deploy
