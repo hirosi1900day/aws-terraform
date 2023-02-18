@@ -20,7 +20,7 @@ env:
 defaults:
   run: 
     shell: bash
-    working-directory: "v1_infra/**"
+    working-directory: "v1_infra/"
   
 jobs:
   preview:
