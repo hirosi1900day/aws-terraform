@@ -25,7 +25,7 @@ module "dynamodb" {
 }
 
 module "iam" {
-  source = "../modules/iam"
-  prefix = "sample1"
+  source                  = "../modules/iam"
+  prefix                  = "sample1"
   employee_list_table-arn = module.dynamodb.employee_list_table.arn
 }
