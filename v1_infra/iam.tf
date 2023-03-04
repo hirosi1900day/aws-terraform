@@ -1,8 +1,3 @@
-variable "prefix" {
-  type    = string
-  defualt = "arexa"
-}
-
 variable "arexa_list_table-arn" {
   type = string
 }
