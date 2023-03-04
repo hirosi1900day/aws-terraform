@@ -27,5 +27,5 @@ module "dynamodb" {
 module "iam" {
   source                  = "../module/iam"
   prefix                  = "sample1"
-  employee_list_table-arn = module.dynamodb.employee_list_table.arn
+  arexa_list_table-arn = module.dynamodb.employee_list_table.arn
 }

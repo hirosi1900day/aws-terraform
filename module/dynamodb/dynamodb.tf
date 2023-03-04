@@ -2,21 +2,21 @@ variable "prefix" {
   type = string
 }
 
-resource "aws_dynamodb_table" "arexa2_list" {
-  name         = "${var.prefix}_arexa2_list"
+resource "aws_dynamodb_table" "arexa_list" {
+  name         = "${var.prefix}_arexa_list"
   billing_mode = "PAY_PER_REQUEST"
-  hash_key     = "arexa2Id"
+  hash_key     = "arexaId"
   attribute {
-    name = "arexa2Id"
+    name = "arexaId"
     type = "S"
   }
 }
 
-resource "aws_dynamodb_table_item" "arexa2_list_item" {
-  table_name = aws_dynamodb_table.arexa2_list.name
-  hash_key   = "arexa2Id"
+resource "aws_dynamodb_table_item" "arexa_list_item" {
+  table_name = aws_dynamodb_table.arexa_list.name
+  hash_key   = "arexaId"
   item = jsonencode({
-    arexa2Id = {
+    arexaId = {
       S = "a00000110"
     },
     FirstName = {
@@ -31,6 +31,6 @@ resource "aws_dynamodb_table_item" "arexa2_list_item" {
   })
 }
 
-output "arexa2_list_table" {
-  value = aws_dynamodb_table.arexa2_list
+output "arexa_list_table" {
+  value = aws_dynamodb_table.arexa_list
 }
