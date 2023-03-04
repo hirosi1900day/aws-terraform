@@ -1,4 +1,8 @@
-variable "arexa_list_table-arn" {
+variable "prefix" {
+  type = string
+}
+
+variable "employee_list_table-arn" {
   type = string
 }
 
@@ -36,7 +40,7 @@ resource "aws_iam_role_policy" "tr_lambda_role_policy_policy" {
           "dynamodb:GetItem"
         ]
         Resource = [
-          var.arexa_list_table-arn
+          var.employee_list_table-arn
         ]
       }
     ]
