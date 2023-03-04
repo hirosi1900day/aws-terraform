@@ -31,7 +31,7 @@ module "iam" {
 }
 
 module "lambda" {
-  source                = "../modules/lambda"
+  source                = "../module/lambda"
   prefix                = "sample1"
   arexa_list_table-name = module.dynamodb.arexa_list_table.name
   tr_lambda_role-arn    = module.iam.tr_lambda_role-arn
