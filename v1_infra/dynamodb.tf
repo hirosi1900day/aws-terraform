@@ -1,5 +1,6 @@
 variable "prefix" {
   type = string
+  default = "arexa"
 }
 
 resource "aws_dynamodb_table" "arexa_list" {
