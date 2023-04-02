@@ -2,7 +2,7 @@ name: "destory"
 
 on:
   workflow_dispatch:
-
+  
 permissions:
   id-token: write
   contents: read
