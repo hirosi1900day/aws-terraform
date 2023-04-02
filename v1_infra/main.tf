@@ -20,18 +20,18 @@ provider "aws" {
 }
 
 module "dynamodb" {
-  source = "../module/dynamodb"
+  source = "./modules/dynamodb"
   prefix = "sample1"
 }
 
 module "iam" {
-  source               = "../module/iam"
+  source               = "./modules/iam"
   prefix               = "sample1"
   arexa_list_table-arn = module.dynamodb.arexa_list_table.arn
 }
 
 module "lambda" {
-  source                = "../module/lambda"
+  source                = "./modules/lambda"
   prefix                = "sample1"
   arexa_list_table-name = module.dynamodb.arexa_list_table.name
   tr_lambda_role-arn    = module.iam.tr_lambda_role-arn
@@ -39,9 +39,6 @@ module "lambda" {
 
 module "eks_network" {
   source = "./modules/eks_network"
-
-  env      = var.env
-  basename = var.basename
   name     = "eks_network"
   cidr     = "10.3.0.0/16"
 }
