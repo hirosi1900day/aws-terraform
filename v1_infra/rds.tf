@@ -13,6 +13,7 @@ resource "aws_db_instance" "default" {
   password               = "foobarbaz"
   parameter_group_name   = "default.mysql8.0"
   skip_final_snapshot    = true
+  multi_az               = false
   vpc_security_group_ids = [aws_security_group.rds-sg.id]
   db_subnet_group_name   = aws_db_subnet_group.rds-subnet-group.name
 }
