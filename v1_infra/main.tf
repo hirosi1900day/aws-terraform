@@ -36,3 +36,12 @@ module "lambda" {
   arexa_list_table-name = module.dynamodb.arexa_list_table.name
   tr_lambda_role-arn    = module.iam.tr_lambda_role-arn
 }
+
+module "eks_network" {
+  source = "./modules/eks_network"
+
+  env      = var.env
+  basename = var.basename
+  name     = "eks_network"
+  cidr     = "10.3.0.0/16"
+}
