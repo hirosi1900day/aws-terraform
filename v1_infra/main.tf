@@ -39,6 +39,6 @@ module "lambda" {
 
 module "eks_network" {
   source = "./modules/eks_network"
-  name     = "eks_network"
-  cidr     = "10.3.0.0/16"
+  name   = "eks_network"
+  cidr   = "10.3.0.0/16"
 }
