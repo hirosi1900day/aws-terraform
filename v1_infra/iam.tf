@@ -1,10 +1,4 @@
-variable "prefix" {
-  type = string
-}
 
-variable "arexa_list_table-arn" {
-  type = string
-}
 
 resource "aws_iam_role" "tr_lambda_role" {
   name = "${var.prefix}_tr_lambda_role"
@@ -40,7 +34,7 @@ resource "aws_iam_role_policy" "tr_lambda_role_policy_policy" {
           "dynamodb:GetItem"
         ]
         Resource = [
-          var.arexa_list_table-arn
+          aws_dynamodb_table.arexa_list.arn
         ]
       }
     ]
