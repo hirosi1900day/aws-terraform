@@ -14,6 +14,11 @@ variable "cidr" {
   default = "10.3.0.0/16"
 }
 
+variable "eks_name" {
+  type    = string
+  default = "test_eks"
+}
+
 
 #   arexa_list_table-arn = module.dynamodb.arexa_list_table.arn
 # }
