@@ -19,6 +19,14 @@ resource "aws_lambda_function" "tr_lambda" {
   }
 }
 
+resource "aws_cloudwatch_log_subscription_filter" "my_subscription_filter" {
+  name            = "my_subscription_filter"
+  role_arn        = aws_iam_role.lambda_role.arn
+  log_group_name  = "/aws/rds/instance/database-1/error"
+  filter_pattern  = "ERROR"
+  destination_arn = "arn:aws:lambda:ap-northeast-1:572919087216:function:sample1_tr_lambda"
+}
+
 output "tr_lambda-invoke-arn" {
   value = aws_lambda_function.tr_lambda.invoke_arn
 }
