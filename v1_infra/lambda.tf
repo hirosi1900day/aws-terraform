@@ -5,34 +5,24 @@ data "archive_file" "tr_lambda" {
 }
 
 resource "aws_lambda_function" "tr_lambda" {
-  filename           = data.archive_file.tr_lambda.output_path
-  function_name      = "${var.prefix}_tr_lambda"
-  role               = aws_iam_role.tr_lambda_role.arn
-  handler            = "tr_lambda.handler"
-  source_code_hash   = data.archive_file.tr_lambda.output_base64sha256
-  runtime            = "python3.9"
-  timeout            = 29
-  attach_policy_json = true
-  policy_json        = <<EOF
-    {
-      "Version": "2012-10-17",
-      "Statement": [
-          {
-              "Effect": "Allow",
-              "Sid": "AllowDecryptKmsKey",
-              "Action": [
-                 "kms:Decrypt"
-              ],
-              "Resource": ["*"]
-          }
-      ]
-    }
-  EOF
+  filename         = data.archive_file.tr_lambda.output_path
+  function_name    = "${var.prefix}_tr_lambda"
+  role             = aws_iam_role.tr_lambda_role.arn
+  handler          = "tr_lambda.handler"
+  source_code_hash = data.archive_file.tr_lambda.output_base64sha256
+  runtime          = "python3.9"
+  timeout          = 29
   environment {
     variables = {
       TABLE_NAME = "test"
     }
   }
+}
+
+resource "aws_ssm_parameter" "foo" {
+  name  = "foo"
+  type  = "String"
+  value = "あとで変更する"
 }
 
 # resource "aws_cloudwatch_log_subscription_filter" "my_subscription_filter" {
