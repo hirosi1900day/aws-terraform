@@ -12,6 +12,21 @@ resource "aws_lambda_function" "tr_lambda" {
   source_code_hash = data.archive_file.tr_lambda.output_base64sha256
   runtime          = "python3.9"
   timeout          = 29
+  policy_json      = <<EOF
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+          {
+              "Effect": "Allow",
+              "Sid": "AllowDecryptKmsKey",
+              "Action": [
+                 "kms:Decrypt"
+              ],
+              "Resource": ["*"]
+          }
+      ]
+    }
+  EOF
   environment {
     variables = {
       TABLE_NAME = "test"
