@@ -14,7 +14,8 @@ resource "aws_lambda_function" "tr_lambda" {
   timeout          = 29
   environment {
     variables = {
-      TABLE_NAME = "test"
+      TABLE_NAME            = "test"
+      GITHUB_TOKEN_SSM_NAME = aws_ssm_parameter.foo.name
     }
   }
 }
