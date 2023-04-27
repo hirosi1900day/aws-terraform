@@ -25,7 +25,7 @@ resource "aws_ssm_parameter" "foo" {
   type  = "String"
   value = "あとで変更する"
 }
-# 更新方法
+# 更新方法  aws ssm put-parameter --name "foo" --type "String" --value "hello" --overwrite --profile private
 
 # resource "aws_cloudwatch_log_subscription_filter" "my_subscription_filter" {
 #   name            = "my_subscription_filter"
@@ -33,6 +33,12 @@ resource "aws_ssm_parameter" "foo" {
 #   filter_pattern  = "ERROR"
 #   destination_arn = "arn:aws:lambda:ap-northeast-1:572919087216:function:sample1_tr_lambda"
 # }
+
+resource "aws_lambda_event_source_mapping" "example" {
+  event_source_arn  = aws_dynamodb_table.example.stream_arn
+  function_name     = aws_lambda_function.example.arn
+  starting_position = "LATEST"
+}
 
 output "tr_lambda-invoke-arn" {
   value = aws_lambda_function.tr_lambda.invoke_arn
