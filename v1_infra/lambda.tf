@@ -36,7 +36,7 @@ resource "aws_ssm_parameter" "foo" {
 
 resource "aws_lambda_event_source_mapping" "example" {
   event_source_arn  = "arn:aws:logs:ap-northeast-1:572919087216:log-group:/aws/rds/instance/database-1/error:*"
-  function_name     = aws_lambda_function.example.tr_lambda
+  function_name     = aws_lambda_function.tr_lambda
   starting_position = "LATEST"
 
   batch_size = 100
