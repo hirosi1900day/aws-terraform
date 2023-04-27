@@ -25,6 +25,7 @@ resource "aws_ssm_parameter" "foo" {
   type  = "String"
   value = "あとで変更する"
 }
+# 更新方法
 
 # resource "aws_cloudwatch_log_subscription_filter" "my_subscription_filter" {
 #   name            = "my_subscription_filter"
