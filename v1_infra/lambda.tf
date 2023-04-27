@@ -27,21 +27,21 @@ resource "aws_ssm_parameter" "foo" {
 }
 # 更新方法  aws ssm put-parameter --name "foo" --type "String" --value "hello" --overwrite --profile private
 
-# resource "aws_cloudwatch_log_subscription_filter" "my_subscription_filter" {
-#   name            = "my_subscription_filter"
-#   log_group_name  = "/aws/rds/instance/database-1/error"
-#   filter_pattern  = "ERROR"
-#   destination_arn = "arn:aws:lambda:ap-northeast-1:572919087216:function:sample1_tr_lambda"
-# }
-
-resource "aws_lambda_event_source_mapping" "example" {
-  event_source_arn  = "arn:aws:logs:ap-northeast-1:572919087216:log-group:/aws/rds/instance/database-1/error:*"
-  function_name     = aws_lambda_function.tr_lambda.arn
-  starting_position = "LATEST"
-
-  batch_size = 100
-  enabled    = true
+resource "aws_cloudwatch_log_subscription_filter" "my_subscription_filter" {
+  name            = "my_subscription_filter"
+  log_group_name  = "/aws/rds/instance/database-1/error"
+  filter_pattern  = "ERROR"
+  destination_arn = aws_lambda_function.tr_lambda.arn
 }
+
+# resource "aws_lambda_event_source_mapping" "example" {
+#   event_source_arn  = "arn:aws:logs:ap-northeast-1:572919087216:log-group:/aws/rds/instance/database-1/error:*"
+#   function_name     = aws_lambda_function.tr_lambda.arn
+#   starting_position = "LATEST"
+
+#   batch_size = 100
+#   enabled    = true
+# }
 
 output "tr_lambda-invoke-arn" {
   value = aws_lambda_function.tr_lambda.invoke_arn
