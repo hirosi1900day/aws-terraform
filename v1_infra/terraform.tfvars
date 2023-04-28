@@ -1,2 +1,2 @@
-project     = "tastylog"
-domain      = "tastylog.work"
+project = "tastylog"
+domain  = "tastylog.work"
