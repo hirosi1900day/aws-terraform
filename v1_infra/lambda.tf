@@ -32,7 +32,16 @@ resource "aws_cloudwatch_log_subscription_filter" "my_subscription_filter" {
   log_group_name  = "/aws/rds/instance/database-1/error"
   filter_pattern  = "ERROR"
   destination_arn = aws_lambda_function.tr_lambda.arn
+  depends_on      = [aws_lambda_permission.logging]
 }
+
+resource "aws_lambda_permission" "logging" {
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.tr_lambda.function_name
+  principal     = "logs.ap-northeast-1.amazonaws.com"
+  source_arn    = "arn:aws:logs:ap-northeast-1:572919087216:log-group:/aws/rds/instance/database-1/error:*"
+}
+
 
 # resource "aws_lambda_event_source_mapping" "example" {
 #   event_source_arn  = "arn:aws:logs:ap-northeast-1:572919087216:log-group:/aws/rds/instance/database-1/error:*"
