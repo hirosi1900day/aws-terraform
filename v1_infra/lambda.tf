@@ -14,8 +14,8 @@ resource "aws_lambda_function" "tr_lambda" {
   timeout          = 29
   environment {
     variables = {
-      TABLE_NAME            = "test"
-      GITHUB_TOKEN_SSM_NAME = aws_ssm_parameter.foo.name
+      SLACK_CHANEL            = "#test2"
+      WEB_HOOK_URL = aws_ssm_parameter.foo.name
     }
   }
 }
@@ -23,7 +23,7 @@ resource "aws_lambda_function" "tr_lambda" {
 resource "aws_ssm_parameter" "foo" {
   name  = "foo"
   type  = "String"
-  value = "あとで変更する"
+  value = "https://hooks.slack.com/services/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"
 }
 # 更新方法  aws ssm put-parameter --name "foo" --type "String" --value "hello" --overwrite --profile private
 
