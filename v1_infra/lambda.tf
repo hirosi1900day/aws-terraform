@@ -23,7 +23,7 @@ resource "aws_lambda_function" "tr_lambda" {
 resource "aws_ssm_parameter" "foo" {
   name  = "foo"
   type  = "String"
-  value = "https://hooks.slack.com/services/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"
+  value = "https://hooks.slack.com/services/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"
 }
 # 更新方法  aws ssm put-parameter --name "foo" --type "String" --value "hello" --overwrite --profile private
 
