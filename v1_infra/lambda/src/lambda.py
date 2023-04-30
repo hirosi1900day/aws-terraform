@@ -10,11 +10,10 @@ from urllib.error import URLError, HTTPError
 
 SLACK_CHANNEL = os.environ['SLACK_CHANEL']
 
-ENCRYPTED_WEB_HOOK_URL = os.environ['WEB_HOOK_URL']
-HOOK_URL = boto3.client('kms').decrypt(
-        CiphertextBlob=b64decode(ENCRYPTED_WEB_HOOK_URL),
-        EncryptionContext={'LambdaFunctionName': os.environ['AWS_LAMBDA_FUNCTION_NAME']}
-    )['Plaintext'].decode('utf-8')
+base_message_parameter = boto3.client('ssm').get_parameter(
+    Name = 'foo'
+)
+HOOK_URL = base_message_parameter['Parameter']['Value']
     
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
