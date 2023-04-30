@@ -14,7 +14,7 @@ resource "aws_lambda_function" "tr_lambda" {
   timeout          = 29
   environment {
     variables = {
-      SLACK_CHANEL            = "#test2"
+      SLACK_CHANEL = "#test2"
       WEB_HOOK_URL = aws_ssm_parameter.foo.name
     }
   }
