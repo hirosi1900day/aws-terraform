@@ -66,7 +66,8 @@ resource "aws_iam_role_policy" "lambda_policy" {
       {
         Effect = "Allow"
         Action = [
-          "kms:Decrypt"
+          "kms:Decrypt",
+          "ssm:GetParameter"
         ]
         Resource = "*"
       }
