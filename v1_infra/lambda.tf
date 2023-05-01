@@ -18,6 +18,9 @@ resource "aws_lambda_function" "tr_lambda" {
       WEB_HOOK_URL = aws_ssm_parameter.foo.name
     }
   }
+  tracing_config {
+    mode = "Active"
+  }
 }
 
 resource "aws_ssm_parameter" "foo" {
