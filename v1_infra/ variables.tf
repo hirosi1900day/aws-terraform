@@ -19,7 +19,7 @@ variable "eks_name" {
   default = "test_eks"
 }
 
-
+# テスト
 #   arexa_list_table-arn = module.dynamodb.arexa_list_table.arn
 # }
 
